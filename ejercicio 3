@@ -1,0 +1,86 @@
+Algoritmo AuditoriaAcademica
+	Definir opcionMenu, totalAlumnos, cantAprobados, cantRecuperacion, cantReprobados Como Entero
+	Definir nota1, nota2, nota3, notaFinal, sumaNotasGrupo, promedioGeneral Como Real
+	totalAlumnos = 0
+	cantAprobados = 0
+	cantRecuperacion = 0
+	cantReprobados = 0
+	sumaNotasGrupo = 0.0
+	Escribir " SISTEMA DE AUDITORÍA ACADÉMICA Y NOTAS "
+	opcionMenu = 0
+	Mientras opcionMenu <> 3 Hacer
+		Escribir "MENÚ PRINCIPAL"
+		Escribir "1. Registrar un nuevo estudiante"
+		Escribir "2. Consultar estadísticas del grupo"
+		Escribir "3. Salir de la aplicación"
+		Escribir "Seleccione una opción (1-3):"
+		Leer opcionMenu
+		Si opcionMenu = 1 Entonces
+			Escribir "INGRESO DE CALIFICACIONES"
+			nota1 = -1.0
+			Mientras (nota1 < 0.0) O (nota1 > 5.0) Hacer
+				Escribir "Ingrese la nota del Parcial 1 (30%):"
+				Leer nota1
+				Si (nota1 < 0.0) O (nota1 > 5.0) Entonces
+					Escribir "Error: La nota debe estar en el rango de 0.0 a 5.0."
+				FinSi
+			FinMientras
+			nota2 = -1.0
+			Mientras (nota2 < 0.0) O (nota2 > 5.0) Hacer
+				Escribir "Ingrese la nota del Parcial 2 (30%):"
+				Leer nota2
+				Si (nota2 < 0.0) O (nota2 > 5.0) Entonces
+					Escribir "Error: La nota debe estar en el rango de 0.0 a 5.0."
+				FinSi
+			FinMientras
+			nota3 = -1.0
+			Mientras (nota3 < 0.0) O (nota3 > 5.0) Hacer
+				Escribir "Ingrese la nota del Parcial 3 (40%):"
+				Leer nota3
+				Si (nota3 < 0.0) O (nota3 > 5.0) Entonces
+					Escribir "Error: La nota debe estar en el rango de 0.0 a 5.0."
+				FinSi
+			FinMientras
+			notaFinal = (nota1 * 0.30) + (nota2 * 0.30) + (nota3 * 0.40)
+			Escribir "RESULTADO DEL ESTUDIANTE"
+			Escribir "Nota Definitiva: ",notaFinal
+			
+			Si notaFinal >= 3.0 Entonces
+				Escribir "Estado Académico: APROBADO"
+				cantAprobados = cantAprobados + 1
+			Sino
+				Si (notaFinal >= 2.0) Y (notaFinal <= 2.9) Entonces
+					Escribir "Estado Académico: EN RECUPERACIÓN"
+					cantRecuperacion = cantRecuperacion + 1
+				Sino
+					Escribir "Estado Académico: REPROBADO"
+					cantReprobados = cantReprobados + 1
+				FinSi
+			FinSi
+			totalAlumnos = totalAlumnos + 1
+			sumaNotasGrupo = sumaNotasGrupo + notaFinal
+			
+		Sino
+			Si opcionMenu = 2 Entonces
+				Escribir "ESTADÍSTICAS CONSOLIDADAS DEL GRUPO"
+				Si totalAlumnos = 0 Entonces
+					Escribir "No hay estudiantes registrados hasta el momento."
+				Sino
+					promedioGeneral = sumaNotasGrupo / totalAlumnos
+					Escribir "Total de estudiantes registrados: ", totalAlumnos
+					Escribir "Estudiantes Aprobados: ", cantAprobados
+					Escribir "Estudiantes en Recuperación: ", cantRecuperacion
+					Escribir "Estudiantes Reprobados: ", cantReprobados
+					Escribir "Nota promedio general del grupo: ", promedioGeneral
+				FinSi
+				
+			Sino
+				Si opcionMenu = 3 Entonces
+					Escribir "Saliendo de la aplicación de auditoría..."
+				Sino
+					Escribir "Opción no válida. Por favor, ingrese un número entre 1 y 3."
+				FinSi
+			FinSi
+		FinSi
+	FinMientras
+FinAlgoritmo
