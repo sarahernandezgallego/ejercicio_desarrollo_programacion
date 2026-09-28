@@ -1,0 +1,70 @@
+Algoritmo ControlStockYCaja
+	Definir stockDisponible, opcionMenu, sacosAComprar Como Entero
+	Definir precioSaco, subtotal, descuento, totalAPagar, recaudoTotal Como Rea
+	precioSaco = 85000.0
+	recaudoTotal = 0.0
+	Escribir " CONTROL DE STOCK Y CAJA - AGROINSUMOS DEL VALLE"
+	stockDisponible = 0
+	Mientras stockDisponible <= 0 Hacer
+		Escribir "Ingrese la cantidad inicial de sacos en bodega:"
+		Leer stockDisponible
+		Si stockDisponible <= 0 Entonces
+			Escribir "Error: Debe ingresar una cantidad mayor a 0."
+		FinSi
+	FinMientras
+	opcionMenu = 0
+	Mientras opcionMenu <> 3 Hacer
+		Escribir "MENÚ PRINCIPAL"
+		Escribir "1. Realizar una venta"
+		Escribir "2. Consultar stock disponible"
+		Escribir "3. Realizar cierre de caja y salir"
+		Escribir "Seleccione una opción (1-3):"
+		Leer opcionMenu
+		Si opcionMenu = 1 Entonces
+			Escribir "PROCESO DE VENTA"
+			sacosAComprar = 0
+			Mientras sacosAComprar <= 0 Hacer
+				Escribir "Ingrese la cantidad de sacos que desea llevar el cliente:"
+				Leer sacosAComprar
+				Si sacosAComprar <= 0 Entonces
+					Escribir "Error: La cantidad de sacos debe ser un número entero mayor a 0."
+				FinSi
+			FinMientras
+			Si sacosAComprar > stockDisponible Entonces
+				Escribir "ALERTA: No hay suficiente stock en bodega. Stock actual: ",stockDisponible," sacos."
+				Escribir "Transacción cancelada. Regresando al menú principal..."
+			Sino
+				subtotal = sacosAComprar * precioSaco
+				Si sacosAComprar >= 10 Entonces
+					descuento = subtotal * 0.08
+				Sino
+					descuento = 0.0
+				FinSi
+				totalAPagar = subtotal - descuento
+				stockDisponible = stockDisponible - sacosAComprar
+				recaudoTotal = recaudoTotal + totalAPagar
+				Escribir "DETALLE DE COMPRA"
+				Escribir "Subtotal: $",subtotal
+				Escribir "Descuento aplicado: ",descuento
+				Escribir "Total a pagar: "totalAPagar
+				Escribir "Venta procesada con éxito."
+			FinSi
+			
+		Sino
+			Si opcionMenu = 2 Entonces
+				Escribir "CONSULTA DE INVENTARIO EN TIEMPO REAL"
+				Escribir "Sacos disponibles actualmente en bodega: ",stockDisponible
+				
+			Sino
+				Si opcionMenu = 3 Entonces
+					Escribir " REPORTE DE CIERRE DE CAJA "
+					Escribir " Total de dinero recaudado en el turno: ", recaudoTotal
+					Escribir " Cantidad final de sacos en bodega: ", stockDisponible, " sacos"
+					Escribir "Cerrando el sistema..."
+				Sino
+					Escribir "Opción no válida. Por favor, ingrese un número entre 1 y 3."
+				FinSi
+			FinSi
+		FinSi
+ FinMientras
+FinAlgoritmo
